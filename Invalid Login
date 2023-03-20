@@ -1,0 +1,18 @@
+describe('Invalid Login', () => {
+  it('displays error message on invalid credentials', () => {
+    // Navigate to the homepage
+    cy.visit('https://the-internet.herokuapp.com/')
+    // Click on a link to navigate to another page
+cy.get('a[href="/Form Authentication"]').click()
+
+    // Enter invalid credentials
+    cy.get('[name="username"]').type('thomas')
+    cy.get('[name="password"]').type('SecurePassword!')
+
+    // Click the login button
+    cy.get('button[type="submit"]').click()
+
+    // Assert that the error message is displayed
+    cy.contains('Your username is invalid!').should('be.visible')
+  })
+})
