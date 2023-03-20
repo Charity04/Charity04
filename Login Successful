@@ -1,0 +1,20 @@
+describe('Login', () => {
+  it('Logs in with valid credentials', () => {
+    // Navigate to the homepage
+    cy.visit('https://the-internet.herokuapp.com/')
+    // Click on a link to navigate to another page
+cy.get('a[href="/Form Authentication"]').click()
+
+    // Enter valid login credentials
+    cy.get('[name="username"]').type('tomsmith')
+    cy.get('[name="password"]').type('SuperSecretPassword!')
+
+    // Submit the form
+    cy.get('[type="submit"]').click()
+
+    // Wait for the login to complete and verify success
+    cy.location('pathname').should('eq', '/dashboard')
+    cy.contains('You logged into a secure area!,').should('be.visible')
+    cy.contains('Logout').should('be.visible')
+  })
+})
